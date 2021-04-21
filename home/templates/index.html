@@ -1,0 +1,24 @@
+{% extends "homebase.html" %}
+
+{% block title %} {{ setting.title }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+
+{% block head %} <link rel="icon" type='image/x-icon' href='{{ setting.icon.url }}'> {% endblock %}
+
+{% block slider %}
+    {% include "slider.html" %}
+    {% include "academic_units.html" %}
+{% endblock %}
+
+{% block news %}
+    {% include "news.html" %}
+{% endblock %}
+
+{% block announcements %}
+    {% include "announcements.html" %}
+{% endblock %}
+
+{% block activities %}
+    {% include "activities.html" %}
+{% endblock %}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <!--Tıtle içindeki metni değişken yapma-->
+    <title>{% block title %} Django Üniversite Kurumsal Sitesi {% endblock %}</title>
+
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="keywords" content="{% block keywords %} Kurumsal Site Anahtar Kelimeler {% endblock %}">
+    <meta name="description" content="{% block description %} Kurumsal Site Kısa Açıklamalar {% endblock %}">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@1,600;1,700;1,800&family=Roboto:wght@400;500&display=swap"
+          rel="stylesheet">
+    {% load static %}
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    {% block head %} {% endblock %}
+</head>
+
+<body>
+    <div class="wrapper">
+        {% include 'header.html' %}
+        {% block slider %} {% endblock %}
+        {% block news %} {% endblock %}
+        {% block announcements %} {% endblock %}
+        {% block activities %} {% endblock %}
+        {% include 'footer.html' %}
+    </div>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+        <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+        <script src="{% static 'lib/isotope/isotope.pkgd.min.js' %}"></script>
+
+        <!-- Template Javascript -->
+        <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
