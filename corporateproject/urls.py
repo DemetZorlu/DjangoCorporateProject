@@ -18,13 +18,18 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+from home import views
+
 urlpatterns = [
     path('', include('home.urls')),
     path('home/', include('home.urls')),
+    path('contact/', include('home.urls')),
+    path('about/', include('home.urls')),
+    path('referances/', include('home.urls')),
     path('content/', include('content.urls')),
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
-#Görselin admin panelinde görüntülenmesine ve görsel yoluna adres satırı ile ulaşışmasına sağlıyor.
+# Görselin admin panelinde görüntülenmesine ve görsel yoluna adres satırı ile ulaşışmasına sağlıyor.
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -28,12 +28,13 @@
 
 <body>
     <div class="wrapper">
-        {% include 'header.html' %}
+        {% include 'particalpages/header.html' %}
         {% block slider %} {% endblock %}
         {% block news %} {% endblock %}
         {% block announcements %} {% endblock %}
         {% block activities %} {% endblock %}
-        {% include 'footer.html' %}
+        {% block contact %} {% endblock %}
+        {% include 'particalpages/footer.html' %}
     </div>
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
