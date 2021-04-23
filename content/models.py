@@ -33,6 +33,7 @@ class Content(models.Model):
         (1, 'Menu'),
         (2, 'Haber'),
         (3, 'Duyuru'),
+        (4, 'Banner'),
     )
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
@@ -49,7 +50,10 @@ class Content(models.Model):
         return self.title
 
     def image_tag(self):
-        return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
+        if self.image == "":
+            return ""
+        else:
+            return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
 
     image_tag.short_description = 'Image'
 

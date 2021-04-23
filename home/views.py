@@ -3,12 +3,14 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
+from content.models import Content
 from home.models import Setting, ContactFormu, ContactFormMessage
 
 
 def index(request):
     setting = Setting.objects.all()
-    context = {'setting': setting[0], 'page': 'home'}
+    sliderdata = Content.objects.filter(type=4, status="True")
+    context = {'setting': setting[0], 'page': 'home', 'sliderdata': sliderdata}
     return render(request, 'index.html', context)
 
 
@@ -21,7 +23,7 @@ def contact(request):
             data.email = form.cleaned_data['email']
             data.subject = form.cleaned_data['subject']
             data.message = form.cleaned_data['message']
-            data.ip=request.META.get('REMOTE_ADDR')
+            data.ip = request.META.get('REMOTE_ADDR')
             data.save()
             messages.success(request, "Mesajınız gönderilmiştir. Teşekkür ederiz.")
             return HttpResponseRedirect('/contact')
