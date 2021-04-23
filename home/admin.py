@@ -1,5 +1,5 @@
 from django.contrib import admin
-from home.models import Setting
+from home.models import Setting, ContactFormMessage
 
 
 class SettingAdmin(admin.ModelAdmin):
@@ -7,4 +7,10 @@ class SettingAdmin(admin.ModelAdmin):
     readonly_fields = ['image_tag']
 
 
-admin.site.register(Setting,SettingAdmin)
+class ContactFormMessageAdmin(admin.ModelAdmin):
+    list_display = ['name', 'subject', 'note','status']
+    list_filter = ['status']
+
+
+admin.site.register(ContactFormMessage, ContactFormMessageAdmin)
+admin.site.register(Setting, SettingAdmin)

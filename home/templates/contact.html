@@ -7,7 +7,96 @@
 {% block head %}
     <link rel="icon" type='image/x-icon' href='{{ setting.icon.url }}'> {% endblock %}
 
-{% block contact %}
+{% block content %}
     {% include "particalpages/pageheader.html" %}
-    {% include "particalpages/contact.html" %}
+
+    <!-- Contact Start -->
+    <div class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Bize Ulaşın</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fa fa-map-marker-alt"></i>
+                            <div class="contact-text">
+                                <h2>Adres</h2>
+                                <p>123 Street, New York, USA</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fa fa-phone-alt"></i>
+                            <div class="contact-text">
+                                <h2>Telefon</h2>
+                                <p>+012 345 67890</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fa fa-envelope"></i>
+                            <div class="contact-text">
+                                <h2>Email</h2>
+                                <p>info@example.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    <div class="contact-form">
+                        <!--
+                        <form>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Adınız" required="required" />
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Email Adresiniz" required="required" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Konu" required="required" />
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" placeholder="Mesaj" required="required" ></textarea>
+                            </div>
+                            <div>
+                                <button class="btn" type="submit">Mesaj Gönder</button>
+                            </div>
+                        </form>
+                        -->
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                {{ form.name }}
+
+                            </div>
+                            <div class="form-group">
+                                {{ form.email }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.subject }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.message }}
+                            </div>
+                            <div>
+                                <button class="btn" type="submit">Mesaj Gönder</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+
+
 {% endblock %}
+
+
