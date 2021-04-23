@@ -17,6 +17,7 @@
 
             {% if forloop.first %}
                 <div class="carousel-item active">
+                    <img src="{{ rs.image.url }}" alt="Carousel Image">
                     <div class="carousel-caption">
                         <h1 class="animated fadeInLeft">{{ rs.title }}</h1>
                         <p class="animated fadeInRight">{{ rs.description }}</p>
@@ -25,6 +26,7 @@
                 </div>
             {% else %}
                 <div class="carousel-item">
+                    <img src="{{ rs.image.url }}" alt="Carousel Image">
                     <div class="carousel-caption">
                         <h1 class="animated fadeInLeft">{{ rs.title }}</h1>
                         <p class="animated fadeInRight">{{ rs.description }}</p>
@@ -32,7 +34,6 @@
                     </div>
                 </div>
             {% endif %}
-            <img src="{{ rs.image.url }}" alt="Carousel Image">
 
         {% endfor %}
 
