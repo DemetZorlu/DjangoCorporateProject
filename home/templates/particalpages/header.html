@@ -45,18 +45,77 @@
 
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a href="/" class="nav-item nav-link active">Anasayfa</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/about" class="nav-item nav-link">Hakkımızda</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/referances" class="nav-item nav-link">Referanslarımız</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/academiccalendar" class="nav-item nav-link">Akademik Takvim</a>
-                    </li>
+                    {% if page == 'home' %}
+                        <li class="nav-item active">
+                            <a href="/" class="nav-item nav-link active">Anasayfa</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a href="/" class="nav-item nav-link">Anasayfa</a>
+                        </li>
+                    {% endif %}
+
+                    {% if page == 'about' %}
+                        <li class="nav-item active">
+                            <a href="/about" class="nav-item nav-link active">Hakkımızda</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a href="/about" class="nav-item nav-link">Hakkımızda</a>
+                        </li>
+                    {% endif %}
+
+                    {% if page == 'referances' %}
+                        <li class="nav-item active">
+                            <a href="/referances" class="nav-item nav-link active">Referanslarımız</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a href="/referances" class="nav-item nav-link">Referanslarımız</a>
+                        </li>
+                    {% endif %}
+
+                    {% if page == 'academiccalendar' %}
+                        <li class="nav-item active">
+                            <a href="/academiccalendar" class="nav-item nav-link active">Akademik Takvim</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a href="/academiccalendar" class="nav-item nav-link">Akademik Takvim</a>
+                        </li>
+                    {% endif %}
+
+                    {% load mptt_tags %}
+                    {% recursetree menu %}
+                        {% if node.is_root_node %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#"
+                                   id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                   aria-expanded="false">
+                                    {{ node.title }}</a>
+                                {% if not node.is_leaf_node %}
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        {{ children }}
+                                    </ul>
+                                {% endif %}
+                            </li>
+                        {% else %}
+                            <li>
+
+                                {% if not node.is_leaf_node %}
+                                    <a class="dropdown-item dropdown-toggle" href="#">{{ node.title }}</a>
+                                    <ul class="dropdown-menu">
+                                        {{ children }}
+                                    </ul>
+                                {% else %}
+                                    <a class="dropdown-item" href="/akademik/{{ node.id }}">{{ node.title }}</a>
+                                {% endif %}
+                            </li>
+                        {% endif %}
+                    {% endrecursetree %}
+
+
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="https://bootstrapthemes.co"
                            id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
@@ -108,9 +167,16 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a href="/contact" class="nav-item nav-link">İletişim</a>
-                    </li>
+                    {% if page == 'contact' %}
+                        <li class="nav-item active">
+                            <a href="/contact" class="nav-item nav-link active">İletişim</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a href="/contact" class="nav-item nav-link">İletişim</a>
+                        </li>
+                    {% endif %}
+
                 </ul>
             </div>
         </nav>
