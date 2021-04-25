@@ -7,8 +7,15 @@
             </div>
             <div class="col-12">
                 <a href="/">Anasayfa</a>
+                {% if menucondata %}
+                    {% if content.type == 1 %}
+                        <a href="/academiccontentlist/{{ content.menu.id }}/{{ content.menu.slug }}">{{ content.menu.title }}</a>
+                    {% endif %}
+                {% endif %}
                 <a href="/{{ page }}">{{ pagename }}</a>
+
             </div>
+
         </div>
     </div>
 </div>
