@@ -15,6 +15,7 @@ class Menu(MPTTModel):
     title = models.CharField(max_length=100)
     keywords = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
+    subtitle = models.CharField(blank=True, max_length=255)
     image = models.ImageField(blank=True, upload_to='images')
     status = models.CharField(max_length=10, choices=STATUS)
     slug = models.SlugField()
@@ -53,6 +54,7 @@ class Content(models.Model):
     type = models.SmallIntegerField(choices=MENUTYPE)
     detail = RichTextUploadingField()
     status = models.CharField(max_length=10, choices=STATUS)
+    slug = models.SlugField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

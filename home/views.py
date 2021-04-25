@@ -55,3 +55,14 @@ def academiccalendar(request):
     menu = Menu.objects.filter(status="True")
     context = {'menu': menu, 'setting': setting[0], 'page': 'academiccalendar', 'pagename': 'Akademik Takvim'}
     return render(request, 'academiccalendar.html', context)
+
+
+def academiccontentlist(request, id, slug):
+    setting = Setting.objects.all()
+    menu = Menu.objects.filter(status="True")
+    menucondata = menu.get(pk=id)
+    contents = Content.objects.filter(menu_id=id)
+    context = {'menu': menu, 'contents': contents, 'setting': setting[0],
+               'page': 'academiccontentlist/%d/%s' % (id, slug),
+               'pagename': menucondata.title, 'subtitle': menucondata.subtitle,'menudata':menucondata}
+    return render(request, 'contentlist.html', context)

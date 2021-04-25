@@ -1,0 +1,53 @@
+{% extends "homebase.html" %}
+
+{% block title %} {{ menudata.title }}-{{ menudata.subtitle }} {% endblock %}
+{% block keywords %} {{ menudata.keywords }} {% endblock %}
+{% block description %} {{ menudata.description }} {% endblock %}
+
+{% block head %}
+    <link rel="icon" type='image/x-icon' href='{{ setting.icon.url }}'> {% endblock %}
+
+{% block content %}
+    {% include "particalpages/pageheader.html" %}
+    <!-- Blog Start -->
+    <div class="blog">
+        <div class="container">
+            <div class="section-header">
+                <h2>{{ subtitle }}</h2>
+            </div>
+
+            <div class="row blog-page">
+                {% for rs in contents %}
+
+
+                    <div class="col-lg-4 col-md-6 blog-item">
+                        {% if rs.image %}
+                            <img src="{{ rs.image.url }}" alt="Blog" width="100%" height="50%">
+                        {% else %}
+                            <svg width="100%" height="50%" style="margin-bottom: 25px">
+                                <rect width="100%" height="100%" alt="Blog"/>
+                            </svg>
+                        {% endif %}
+
+                        <h3>{{ rs.title }}</h3>
+                        <!--<div class="meta">
+                            <i class="fa fa-list-alt"></i>
+                            <a href="">Civil Law</a>
+                            <i class="fa fa-calendar-alt"></i>
+                            <p>01-Jan-2045</p>
+                        </div>-->
+                        <p>
+                            {{ rs.description }}
+                        </p>
+                        <a class="btn" href="/contentdetail/{{ rs.id }}/{{ rs.slug }}">Daha Fazla <i class="fa fa-angle-right"></i></a>
+                    </div>
+                {% endfor %}
+
+
+            </div>
+        </div>
+    </div>
+    <!-- Blog End -->
+
+{% endblock %}
+

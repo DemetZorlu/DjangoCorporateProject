@@ -8,5 +8,6 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('referances/', views.referances, name='referances'),
     path('academiccalendar/', views.academiccalendar, name='academiccalendar'),
+    path('academiccontentlist/<int:id>/<slug:slug>/', views.academiccontentlist, name='academiccontentlist'),
 
 ]
