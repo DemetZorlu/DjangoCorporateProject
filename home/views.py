@@ -10,8 +10,12 @@ from home.models import Setting, ContactFormu, ContactFormMessage
 def index(request):
     setting = Setting.objects.all()
     sliderdata = Content.objects.filter(type=4, status="True")
+    newsdata = Content.objects.filter(type=2, status="True")
+    announcementdata = Content.objects.filter(type=3, status="True")
+    activitiesdata = Content.objects.filter(type=5, status="True")
     menu = Menu.objects.filter(status="True")
-    context = {'menu': menu, 'setting': setting[0], 'page': 'home', 'sliderdata': sliderdata}
+    context = {'menu': menu, 'setting': setting[0], 'page': 'home', 'sliderdata': sliderdata, 'newsdata': newsdata,
+               'announcementdata': announcementdata, 'activitiesdata': activitiesdata}
     return render(request, 'index.html', context)
 
 
@@ -64,5 +68,23 @@ def academiccontentlist(request, id, slug):
     contents = Content.objects.filter(menu_id=id)
     context = {'menu': menu, 'contents': contents, 'setting': setting[0],
                'page': 'academiccontentlist/%d/%s' % (id, slug),
-               'pagename': menucondata.title, 'subtitle': menucondata.subtitle,'menudata':menucondata}
+               'pagename': menucondata.title, 'subtitle': menucondata.subtitle, 'menudata': menucondata}
     return render(request, 'contentlist.html', context)
+
+
+def contentdetail(request, id, slug):
+    setting = Setting.objects.all()
+    menu = Menu.objects.filter(status="True")
+    content = Content.objects.get(pk=id)
+    menucondata = Menu.objects.get(pk=content.menu_id)
+    title = ""
+
+    if content.type == 4:
+        title = "Gündem"
+    else:
+        title = menucondata.title
+
+    context = {'menu': menu, 'content': content, 'setting': setting[0],
+               'page': 'contentdetail/%d/%s' % (id, slug),
+               'pagename': title, 'subtitle': menucondata.subtitle, 'menudata': menucondata}
+    return render(request, 'contentdetail.html', context)

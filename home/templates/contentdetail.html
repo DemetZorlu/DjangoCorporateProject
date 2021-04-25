@@ -9,4 +9,27 @@
 
 {% block content %}
     {% include "particalpages/pageheader.html" %}
+    <!-- Single Page Start -->
+    <div class="single">
+        <div class="container">
+            <div class="section-header">
+                <h2>{{ content.title |safe }}</h2>
+            </div>
+            <div class="row">
+                <div class="col-12" style="text-align: justify">
+                    {% if content.image %}
+                        <div align="center">
+                            <img class="img-fluid rounded" src="{{ content.image.url }}" alt="Image">
+                        </div>
+                    {% endif %}
+                    <p>
+                        {{ content.detail|safe }}
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Single Page End -->
+
 {% endblock %}

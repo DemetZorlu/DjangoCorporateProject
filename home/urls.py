@@ -9,5 +9,6 @@ urlpatterns = [
     path('referances/', views.referances, name='referances'),
     path('academiccalendar/', views.academiccalendar, name='academiccalendar'),
     path('academiccontentlist/<int:id>/<slug:slug>/', views.academiccontentlist, name='academiccontentlist'),
+    path('contentdetail/<int:id>/<slug:slug>/', views.contentdetail, name='contentdetail'),
 
 ]

@@ -21,7 +21,7 @@
                     <div class="carousel-caption">
                         <h1 class="animated fadeInLeft">{{ rs.title }}</h1>
                         <p class="animated fadeInRight">{{ rs.description }}</p>
-                        <a class="btn animated fadeInUp" href="/banner/{{ rs.id }}">Detaylı Bilgi</a>
+                        <a class="btn animated fadeInUp" href="/contentdetail/{{ rs.id }}/{{ rs.slug }}">Detaylı Bilgi</a>
                     </div>
                 </div>
             {% else %}
@@ -30,7 +30,7 @@
                     <div class="carousel-caption">
                         <h1 class="animated fadeInLeft">{{ rs.title }}</h1>
                         <p class="animated fadeInRight">{{ rs.description }}</p>
-                        <a class="btn animated fadeInUp" href="/banner/{{ rs.id }}">Detaylı Bilgi</a>
+                        <a class="btn animated fadeInUp" href="/contentdetail/{{ rs.id }}/{{ rs.slug }}">Detaylı Bilgi</a>
                     </div>
                 </div>
             {% endif %}

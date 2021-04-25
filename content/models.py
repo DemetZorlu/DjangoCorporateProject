@@ -45,6 +45,7 @@ class Content(models.Model):
         (2, 'Haber'),
         (3, 'Duyuru'),
         (4, 'Banner'),
+        (5, 'Etkinlik'),
     )
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
