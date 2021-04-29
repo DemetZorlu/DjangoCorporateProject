@@ -4,6 +4,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from content.models import Content, Menu, Images, Comment
+from home.forms import SearchForm
 from home.models import Setting, ContactFormu, ContactFormMessage
 
 
@@ -77,8 +78,8 @@ def contentdetail(request, id, slug):
     menu = Menu.objects.filter(status="True")
     content = Content.objects.get(pk=id)
     menucondata = Menu.objects.get(pk=content.menu_id)
-    images=Images.objects.filter(content_id=id)
-    comments=Comment.objects.filter(content_id=id,status='True')
+    images = Images.objects.filter(content_id=id)
+    comments = Comment.objects.filter(content_id=id, status='True')
     title = ""
 
     if content.type == 4:
@@ -99,6 +100,20 @@ def contentdetail(request, id, slug):
                'pagename': title,
                'subtitle': menucondata.subtitle,
                'menucondata': menucondata,
-               'images':images,
-               'comments':comments}
+               'images': images,
+               'comments': comments}
     return render(request, 'contentdetail.html', context)
+
+
+def contentsearch(request):
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            menu = Menu.objects.filter(status="True")
+            query = form.cleaned_data['query']
+            contents = Content.objects.filter(title__icontains=query)
+            context = {'menu': menu,
+                       'contents': contents,
+                       'pagename': 'İçerik Arama', }
+            return render(request, 'contentsearch.html', context)
+    return HttpResponseRedirect('/')

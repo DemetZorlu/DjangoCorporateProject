@@ -108,7 +108,8 @@
                                         {{ children }}
                                     </ul>
                                 {% else %}
-                                    <a class="dropdown-item" href="/academiccontentlist/{{ node.id }}/{{ node.slug }}">{{ node.title }}</a>
+                                    <a class="dropdown-item"
+                                       href="/academiccontentlist/{{ node.id }}/{{ node.slug }}">{{ node.title }}</a>
                                 {% endif %}
                             </li>
                         {% endif %}
@@ -176,8 +177,15 @@
                             <a href="/contact" class="nav-item nav-link">İletişim</a>
                         </li>
                     {% endif %}
-
                 </ul>
+                <form class="form-inline my-2 my-lg-0" action="/search/" method="post">
+                    {% csrf_token %}
+                    <input class="form-control mr-sm-2 form-control-sm" type="search" placeholder="Ara"
+                           aria-label="Search" name="query">
+
+                    <button class="btn form-control-sm" type="submit"><i class="fa fa-search"> </i></button>
+                </form>
+
             </div>
         </nav>
 
