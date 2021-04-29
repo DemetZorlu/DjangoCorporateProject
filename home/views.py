@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
-from content.models import Content, Menu, Images
+from content.models import Content, Menu, Images, Comment
 from home.models import Setting, ContactFormu, ContactFormMessage
 
 
@@ -78,6 +78,7 @@ def contentdetail(request, id, slug):
     content = Content.objects.get(pk=id)
     menucondata = Menu.objects.get(pk=content.menu_id)
     images=Images.objects.filter(content_id=id)
+    comments=Comment.objects.filter(content_id=id,status='True')
     title = ""
 
     if content.type == 4:
@@ -91,7 +92,13 @@ def contentdetail(request, id, slug):
     else:
         title = content.title
 
-    context = {'menu': menu, 'content': content, 'setting': setting[0],
+    context = {'menu': menu,
+               'content': content,
+               'setting': setting[0],
                'page': 'contentdetail/%d/%s' % (id, slug),
-               'pagename': title, 'subtitle': menucondata.subtitle, 'menucondata': menucondata, 'images':images}
+               'pagename': title,
+               'subtitle': menucondata.subtitle,
+               'menucondata': menucondata,
+               'images':images,
+               'comments':comments}
     return render(request, 'contentdetail.html', context)

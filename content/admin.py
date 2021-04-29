@@ -1,12 +1,10 @@
-
-
 from django.contrib import admin
 
 # Register your models here.
 from django.utils.html import format_html
 from mptt.admin import MPTTModelAdmin, DraggableMPTTAdmin
 
-from content.models import Menu, Content, Images
+from content.models import Menu, Content, Images, Comment
 
 
 class ContentImageInline(admin.TabularInline):
@@ -30,6 +28,7 @@ class ImagesAdmin(admin.ModelAdmin):
     list_display = ['title', 'content', 'image_tag']
     readonly_fields = ['image_tag']
 
+
 class MenuAdmin2(DraggableMPTTAdmin):
     mptt_indent_field = "title"
     list_display = ('tree_actions', 'indented_title',
@@ -41,29 +40,37 @@ class MenuAdmin2(DraggableMPTTAdmin):
 
         # Add cumulative content count
         qs = Menu.objects.add_related_count(
-                qs,
-                Content,
-                'menu',
-                'contents_cumulative_count',
-                cumulative=True)
+            qs,
+            Content,
+            'menu',
+            'contents_cumulative_count',
+            cumulative=True)
 
         # Add non cumulative content count
         qs = Menu.objects.add_related_count(qs,
-                 Content,
-                 'menu',
-                 'contents_count',
-                 cumulative=False)
+                                            Content,
+                                            'menu',
+                                            'contents_count',
+                                            cumulative=False)
         return qs
 
     def related_contents_count(self, instance):
         return instance.contents_count
+
     related_contents_count.short_description = 'Related contents (for this specific category)'
 
     def related_contents_cumulative_count(self, instance):
         return instance.contents_cumulative_count
+
     related_contents_cumulative_count.short_description = 'Related contents (in tree)'
+
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['subject', 'comment', 'content', 'user', 'status']
+    list_filter = ['status']
 
 
 admin.site.register(Menu, MenuAdmin2)
 admin.site.register(Content, ContentAdmin)
 admin.site.register(Images, ImagesAdmin)
+admin.site.register(Comment, CommentAdmin)
