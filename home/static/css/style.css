@@ -1806,3 +1806,15 @@ a:focus {
 .rate > label:hover ~ input:checked ~ label {
     color: #c59b08;
 }
+
+.btnlogin {
+    color: #ffffff;
+    border: 2px solid #aa9166;
+    border-radius: 0;
+    background-color: transparent;
+    vertical-align: center;
+}
+
+.btnlogin:hover {
+    background: #aa9166;
+}

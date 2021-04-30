@@ -12,5 +12,7 @@ urlpatterns = [
     path('contentdetail/<int:id>/<slug:slug>/', views.contentdetail, name='contentdetail'),
     path('search/', views.contentsearch, name='contentsearch'),
     path('autosearch/', views.autosearch, name='autosearch'),
+    path('logout/', views.logoutview, name='logoutview'),
+    path('login/', views.loginview, name='loginview'),
 
 ]

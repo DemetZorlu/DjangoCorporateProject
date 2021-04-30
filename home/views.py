@@ -1,6 +1,7 @@
 import json
 
 from django.contrib import messages
+from django.contrib.auth import logout, authenticate, login
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
@@ -177,3 +178,37 @@ def autosearch(request):
         data = 'fail'
     mimetype = 'application/json'
     return HttpResponse(data, mimetype)
+
+def logoutview(request):
+    logout(request)
+    return HttpResponseRedirect('/')
+
+
+def loginview(request):
+    if request.method=='POST':
+        username=request.POST['username']
+        password=request.POST['password']
+        user=authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect('/')
+        else:
+            messages.warning(request, "Kullanıcı adı veya şifre hatalı. Tekrar deneyiniz.")
+            return HttpResponseRedirect('/login')
+
+    setting = Setting.objects.all()
+    sliderdata = Content.objects.filter(type=4, status="True")
+    newsdata = Content.objects.filter(type=2, status="True")
+    announcementdata = Content.objects.filter(type=3, status="True")
+    activitiesdata = Content.objects.filter(type=5, status="True")
+    menu = Menu.objects.filter(status="True")
+    menusearch = Menu.objects.all()
+    context = {'menu': menu,
+               'menusearch': menusearch,
+               'setting': setting[0],
+               'page': 'home',
+               'sliderdata': sliderdata,
+               'newsdata': newsdata,
+               'announcementdata': announcementdata,
+               'activitiesdata': activitiesdata}
+    return render(request, 'login.html', context)
