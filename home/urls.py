@@ -11,5 +11,6 @@ urlpatterns = [
     path('academiccontentlist/<int:id>/<slug:slug>/', views.academiccontentlist, name='academiccontentlist'),
     path('contentdetail/<int:id>/<slug:slug>/', views.contentdetail, name='contentdetail'),
     path('search/', views.contentsearch, name='contentsearch'),
+    path('autosearch/', views.autosearch, name='autosearch'),
 
 ]

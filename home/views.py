@@ -1,3 +1,5 @@
+import json
+
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -15,8 +17,15 @@ def index(request):
     announcementdata = Content.objects.filter(type=3, status="True")
     activitiesdata = Content.objects.filter(type=5, status="True")
     menu = Menu.objects.filter(status="True")
-    context = {'menu': menu, 'setting': setting[0], 'page': 'home', 'sliderdata': sliderdata, 'newsdata': newsdata,
-               'announcementdata': announcementdata, 'activitiesdata': activitiesdata}
+    menusearch = Menu.objects.all()
+    context = {'menu': menu,
+               'menusearch': menusearch,
+               'setting': setting[0],
+               'page': 'home',
+               'sliderdata': sliderdata,
+               'newsdata': newsdata,
+               'announcementdata': announcementdata,
+               'activitiesdata': activitiesdata}
     return render(request, 'index.html', context)
 
 
@@ -37,45 +46,73 @@ def contact(request):
     setting = Setting.objects.all()
     form = ContactFormu()
     menu = Menu.objects.filter(status="True")
-    context = {'menu': menu, 'setting': setting[0], 'page': 'contact', 'pagename': 'İletişim', 'form': form}
+    menusearch = Menu.objects.all()
+    context = {'menu': menu,
+               'menusearch': menusearch,
+               'setting': setting[0],
+               'page': 'contact',
+               'pagename': 'İletişim',
+               'form': form}
     return render(request, 'contact.html', context)
 
 
 def about(request):
     setting = Setting.objects.all()
     menu = Menu.objects.filter(status="True")
-    context = {'menu': menu, 'setting': setting[0], 'page': 'about', 'pagename': 'Hakkımızda'}
+    menusearch = Menu.objects.all()
+    context = {'menu': menu,
+               'menusearch': menusearch,
+               'setting': setting[0],
+               'page': 'about',
+               'pagename': 'Hakkımızda'}
     return render(request, 'about.html', context)
 
 
 def referances(request):
     setting = Setting.objects.all()
     menu = Menu.objects.filter(status="True")
-    context = {'menu': menu, 'setting': setting[0], 'page': 'referances', 'pagename': 'Referanslarımız'}
+    menusearch = Menu.objects.all()
+    context = {'menu': menu,
+               'menusearch': menusearch,
+               'setting': setting[0],
+               'page': 'referances',
+               'pagename': 'Referanslarımız'}
     return render(request, 'referances.html', context)
 
 
 def academiccalendar(request):
     setting = Setting.objects.all()
     menu = Menu.objects.filter(status="True")
-    context = {'menu': menu, 'setting': setting[0], 'page': 'academiccalendar', 'pagename': 'Akademik Takvim'}
+    menusearch = Menu.objects.all()
+    context = {'menu': menu,
+               'menusearch': menusearch,
+               'setting': setting[0],
+               'page': 'academiccalendar',
+               'pagename': 'Akademik Takvim'}
     return render(request, 'academiccalendar.html', context)
 
 
 def academiccontentlist(request, id, slug):
     setting = Setting.objects.all()
     menu = Menu.objects.filter(status="True")
+    menusearch = Menu.objects.all()
     menucondata = menu.get(pk=id)
     contents = Content.objects.filter(menu_id=id)
-    context = {'menu': menu, 'contents': contents, 'setting': setting[0],
+    context = {'menu': menu,
+               'menusearch': menusearch,
+               'contents': contents,
+               'setting': setting[0],
                'page': 'academiccontentlist/%d/%s' % (id, slug),
-               'pagename': menucondata.title, 'subtitle': menucondata.subtitle, 'menudata': menucondata}
+               'pagename': menucondata.title,
+               'subtitle': menucondata.subtitle,
+               'menudata': menucondata}
     return render(request, 'contentlist.html', context)
 
 
 def contentdetail(request, id, slug):
     setting = Setting.objects.all()
     menu = Menu.objects.filter(status="True")
+    menusearch = Menu.objects.all()
     content = Content.objects.get(pk=id)
     menucondata = Menu.objects.get(pk=content.menu_id)
     images = Images.objects.filter(content_id=id)
@@ -94,6 +131,7 @@ def contentdetail(request, id, slug):
         title = content.title
 
     context = {'menu': menu,
+               'menusearch': menusearch,
                'content': content,
                'setting': setting[0],
                'page': 'contentdetail/%d/%s' % (id, slug),
@@ -110,10 +148,32 @@ def contentsearch(request):
         form = SearchForm(request.POST)
         if form.is_valid():
             menu = Menu.objects.filter(status="True")
+            menusearch = Menu.objects.all()
             query = form.cleaned_data['query']
-            contents = Content.objects.filter(title__icontains=query)
+            menuid = form.cleaned_data['menuid']
+            if menuid == 0:
+                contents = Content.objects.filter(title__icontains=query)
+            else:
+                contents = Content.objects.filter(title__icontains=query, menu_id=menuid)
             context = {'menu': menu,
+                       'menusearch': menusearch,
                        'contents': contents,
                        'pagename': 'İçerik Arama', }
             return render(request, 'contentsearch.html', context)
     return HttpResponseRedirect('/')
+
+
+def autosearch(request):
+    if request.is_ajax():
+        q = request.GET.get('term', '')
+        contents = Content.objects.filter(title__icontains=q)
+        results = []
+        for rs in contents:
+            conten_json = {}
+            conten__json = rs.title.replace('<br>', '')
+            results.append(conten__json)
+        data = json.dumps(results)
+    else:
+        data = 'fail'
+    mimetype = 'application/json'
+    return HttpResponse(data, mimetype)
