@@ -1,4 +1,5 @@
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.contrib.auth.models import User
 from django.db import models
 from django.forms import ModelForm, TextInput, Textarea
 from django.utils.safestring import mark_safe
@@ -68,6 +69,36 @@ class ContactFormu(ModelForm):
         widgets = {
             'name': TextInput(attrs={'class': 'form-control', 'placeholder': 'Adınız', 'required': 'required'}),
             'subject': TextInput(attrs={'class': 'form-control', 'placeholder': 'Konu', 'required': 'required'}),
-            'email': TextInput(attrs={'class': 'form-control', 'placeholder': 'Email Adresiniz', 'required': 'required'}),
+            'email': TextInput(
+                attrs={'class': 'form-control', 'placeholder': 'Email Adresiniz', 'required': 'required'}),
             'message': Textarea(attrs={'class': 'form-control', 'placeholder': 'Mesaj', 'required': 'required'}),
         }
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    phone = models.CharField(blank=True, max_length=20)
+    address = models.CharField(blank=True, max_length=150)
+    city = models.CharField(blank=True, max_length=20)
+    country = models.CharField(blank=True, max_length=20)
+    image = models.ImageField(blank=True, upload_to='images/users/')
+
+    def __str__(self):
+        return self.user.username
+
+    def user_name(self):
+        return self.user.first_name + ' ' + self.user.last_name
+
+    def image_tag(self):
+        if self.image == "":
+            return ""
+        else:
+            return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
+
+    image_tag.short_description = 'Image'
+
+
+class ProfileForm(ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['phone', 'address', 'city', 'country', 'image']
