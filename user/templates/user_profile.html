@@ -28,18 +28,19 @@
                     {% endif %}
                     <div class="contact-form">
 
-                        <form action="" method="post">
+                        <form action="/user/updateuserprofile/" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="form-group">
-                                <label for="profilresmi">
+                                <label for="image">
                                     <b>Profil Resmi:</b>
                                 </label>
+                                <input type="file" id="image" name="image" accept="image/*">
                                 <br>
 
-                                <img src="{{ profile.image.url }}" alt="" id="profilresmi" name="profilresmi"
+                                <img src="
+                                        {% if profile.image %}{{ profile.image.url }}{% else %}/uploads/images/users/defaultuser.jpg{% endif %}"
+                                     alt="" id="profilresmi" name="profilresmi"
                                      width="200">
-
-
                             </div>
                             <div class="form-group">
                                 <label for="adsoyad"><b>Ad Soyad:</b></label>
@@ -49,27 +50,27 @@
                             </div>
                             <div class="form-group">
                                 <label for="email"><b>Email:</b></label>
-                                <input type="text" class="form-control"  required="required"
+                                <input type="email" class="form-control" required="required"
                                        value="{{ profile.user.email }} " name="email" id="email"/>
                             </div>
                             <div class="form-group">
                                 <label for="phone"><b>Telefon:</b></label>
-                                <input type="text" class="form-control"  required="required"
+                                <input type="text" class="form-control" required="required"
                                        value="{{ profile.phone }} " name="phone" id="phone"/>
                             </div>
                             <div class="form-group">
                                 <label for="address"><b>Adres:</b></label>
-                                <input type="text" class="form-control"  required="required"
+                                <input type="text" class="form-control" required="required"
                                        value="{{ profile.address }} " name="address" id="address"/>
                             </div>
                             <div class="form-group">
                                 <label for="city"><b>Şehir:</b></label>
-                                <input type="text" class="form-control"  required="required"
+                                <input type="text" class="form-control" required="required"
                                        value="{{ profile.city }}" name="city" id="city"/>
                             </div>
                             <div class="form-group">
                                 <label for="country"><b>Ülke:</b></label>
-                                <input type="text" class="form-control"  required="required"
+                                <input type="text" class="form-control" required="required"
                                        value="{{ profile.country }}" name="country" id="country"/>
                             </div>
                             <div>
