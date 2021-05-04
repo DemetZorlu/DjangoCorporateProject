@@ -4,5 +4,6 @@ from user import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('updateuserprofile/', views.updateuserprofile, name="updateuserprofile")
+    path('updateuserprofile/', views.updateuserprofile, name="updateuserprofile"),
+    path('updateuserpassword/', views.updateuserpassword, name="updateuserpassword")
 ]

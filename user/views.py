@@ -1,7 +1,9 @@
 from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from content.models import Menu
@@ -25,7 +27,7 @@ def index(request):
 def updateuserprofile(request):
     url = request.META.get('HTTP_REFERER')
     if request.method == 'POST':
-        form = UserProfileForm(request.POST,request.FILES)
+        form = UserProfileForm(request.POST, request.FILES)
         if form.is_valid():
             data = UserProfile.objects.get(user_id=request.user.id)
             if not data:
@@ -42,3 +44,24 @@ def updateuserprofile(request):
 
     messages.warning(request, "Profil Bilgileriniz güncellerken sorun ile karşılaşılmıştır. Tekrar deneyiniz.")
     return HttpResponseRedirect(url)
+
+
+@login_required(login_url='/login')
+def updateuserpassword(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Şifreniz değiştirilmiştir.')
+            return redirect('/user')
+        else:
+            messages.warning(request, 'Lütfen hataları düzelterek, tekrar deneyiniz.<br>'+str(form.errors))
+            return redirect('/user/updateuserpassword')
+    else:
+        menu = Menu.objects.filter(status="True")
+        menusearch = Menu.objects.all()
+        form = PasswordChangeForm(request.user)
+        return render(request, 'updateuserpassword.html', {
+            'form': form, 'menu': menu, 'menusearch': menusearch
+        })
