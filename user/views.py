@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from content.models import Menu
+from content.models import Menu, Comment
 from user.models import UserProfile, UserProfileForm
 
 
@@ -65,3 +65,21 @@ def updateuserpassword(request):
         return render(request, 'updateuserpassword.html', {
             'form': form, 'menu': menu, 'menusearch': menusearch
         })
+
+@login_required(login_url='/login')
+def comments(request):
+    menu = Menu.objects.filter(status="True")
+    menusearch = Menu.objects.all()
+    comments=Comment.objects.filter(user_id=request.user.id)
+    context = {'menu': menu,
+               'menusearch': menusearch,
+               'page': 'user/comments',
+               'pagename': 'Yorumlarım',
+               'comments': comments}
+    return render(request, 'user_comments.html',context)
+
+@login_required(login_url='/login')
+def deletecomment(request, id):
+    Comment.objects.filter(id=id, user_id=request.user.id).delete()
+    messages.success(request, 'Yorumunuz silindi.')
+    return HttpResponseRedirect('/user/comments')

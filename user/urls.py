@@ -5,5 +5,7 @@ from user import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('updateuserprofile/', views.updateuserprofile, name="updateuserprofile"),
-    path('updateuserpassword/', views.updateuserpassword, name="updateuserpassword")
+    path('updateuserpassword/', views.updateuserpassword, name="updateuserpassword"),
+    path('comments/', views.comments, name="comments"),
+    path('deletecomment/<int:id>',views.deletecomment, name='deletecomment')
 ]

@@ -1,0 +1,79 @@
+{% extends "homebase.html" %}
+
+{% block title %} {{ user.username }} - Yorumlarım {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+
+{% block head %}
+    <link rel="icon" type='image/x-icon' href='{{ setting.icon.url }}'> {% endblock %}
+
+{% block content %}
+
+
+    <!-- Contact Start -->
+    <div class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Yorum Listeleme</h2>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    <div>
+                        {% for rs in comments %}
+                            <div class="card p-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="user d-flex flex-row align-items-center">
+
+                                        <img src="{{ user.userprofile.image.url }}" width="40" height="40"
+                                             class="user-img rounded-circle mr-2">
+                                        <span>
+                                            <a href="/contentdetail/{{ rs.content.id }}/{{ rs.content.slug }}">
+                                                <small class="font-weight-bold text-primary"> {{ rs.content.title }}</small>
+                                            </a>
+                                            <br>
+                                            <small class="font-weight-bold">{{ rs.subject }}</small>
+                                        </span>
+                                    </div>
+                                    <small>{{ rs.created_at|date:"d.m.Y" }}</small>
+                                </div>
+                                <div class="action d-flex justify-content-between mt-2 align-items-center">
+                                    <div class="reply px-4">
+                                        <small>{{ rs.comment }}</small>
+                                    </div>
+                                    <!--<div class="reply px-4"><small>Remove</small> <span class="dots"></span>
+                                        <small>Reply</small> <span class="dots"></span> <small>Translate</small></div>-->
+                                    <div class="icons align-items-center">
+                                        <i class="fa fa-star{% if rs.rate >= 1 %} text-warning {% endif %}"></i>
+                                        <i class="fa fa-star{% if rs.rate > 2 %} text-warning {% endif %}"></i>
+                                        <i class="fa fa-star{% if rs.rate > 3 %} text-warning {% endif %}"></i>
+                                        <i class="fa fa-star{% if rs.rate > 4 %} text-warning {% endif %}"></i>
+                                        <i class="fa fa-star{% if rs.rate == 5 %} text-warning {% endif %}"></i>
+                                    </div>
+                                </div>
+                                <small class="d-block text-right mt-3">
+                                    <a href="/user/deletecomment/{{ rs.id }}" onclick="return confirm('Emin Misiniz?')"
+                                       class="btn btn-sm text-primary">
+                                        <i class="fa fa-trash"></i>
+                                        <span>sil</span>
+                                    </a>
+                                </small>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+
+
+{% endblock %}
+
+
