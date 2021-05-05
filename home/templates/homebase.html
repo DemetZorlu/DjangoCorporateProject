@@ -28,10 +28,52 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     {% block head %} {% endblock %}
+    <style>
+        .modal-dialog {
+            position: fixed;
+            margin: auto;
+            width: 320px;
+            height: 100%;
+            right: 0px;
+            top: 10px;
+        }
+    </style>
 </head>
 
 <body>
 <div class="wrapper">
+    {% if messages %}
+
+        <script>
+            $(document).ready(function () {
+                $('#myModal').modal('show');
+                setTimeout(function () {
+                    $('#myModal').modal('hide');
+                }, 2000);
+            });
+
+        </script>
+
+
+        <!-- The Modal -->
+        <div class="modal right fade" id="myModal">
+            <div class="modal-dialog">
+                {% for message in messages %}
+                    <div class="alert"
+                         style=" background-color: {% if message.tags  == 'danger' %}darkred{% elif message.tags  == 'success' %}green{% elif message.tags  == 'info' %}dodgerblue{% elif message.tags  == 'warning' %}#c59b08{% endif %}; color:white;">
+                        <b>
+                            <i class="fa fa-{% if message.tags  == 'danger' %}exclamation-circle{% elif message.tags  == 'success' %}check-circle{% elif message.tags  == 'info' %}info-circle{% elif message.tags  == 'warning' %}exclamation-triangle{% endif %}" style="color:white;"></i>
+                            <span>
+
+                                    {{ message }}<br>
+
+                            </span>
+                        </b>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
     {% include 'particalpages/header.html' %}
     {% block slider %} {% endblock %}
     {% block news %} {% endblock %}

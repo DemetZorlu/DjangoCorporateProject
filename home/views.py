@@ -93,21 +93,22 @@ def academiccalendar(request):
     return render(request, 'academiccalendar.html', context)
 
 
-def academiccontentlist(request, id, slug):
-    setting = Setting.objects.all()
-    menu = Menu.objects.filter(status="True")
-    menusearch = Menu.objects.all()
-    menucondata = menu.get(pk=id)
-    contents = Content.objects.filter(menu_id=id)
-    context = {'menu': menu,
-               'menusearch': menusearch,
-               'contents': contents,
-               'setting': setting[0],
-               'page': 'academiccontentlist/%d/%s' % (id, slug),
-               'pagename': menucondata.title,
-               'subtitle': menucondata.subtitle,
-               'menudata': menucondata}
-    return render(request, 'contentlist.html', context)
+def menucontent(request, id):
+
+
+    try:
+        content = Content.objects.get(menu_id=id)
+    except:
+
+        content = None
+
+    if content:
+        link = '/contentdetail/' + str(content.id) + '/' + content.slug
+        return HttpResponseRedirect(link);
+    else:
+        messages.error(request, "hata ! İlgili İçerik Bulunamadı. ")
+        link = '/'
+        return HttpResponseRedirect(link)
 
 
 def contentdetail(request, id, slug):
@@ -115,7 +116,6 @@ def contentdetail(request, id, slug):
     menu = Menu.objects.filter(status="True")
     menusearch = Menu.objects.all()
     content = Content.objects.get(pk=id)
-    menucondata = Menu.objects.get(pk=content.menu_id)
     images = Images.objects.filter(content_id=id)
     comments = Comment.objects.filter(content_id=id, status='True')
     title = ""
@@ -137,8 +137,6 @@ def contentdetail(request, id, slug):
                'setting': setting[0],
                'page': 'contentdetail/%d/%s' % (id, slug),
                'pagename': title,
-               'subtitle': menucondata.subtitle,
-               'menucondata': menucondata,
                'images': images,
                'comments': comments}
     return render(request, 'contentdetail.html', context)
@@ -179,16 +177,17 @@ def autosearch(request):
     mimetype = 'application/json'
     return HttpResponse(data, mimetype)
 
+
 def logoutview(request):
     logout(request)
     return HttpResponseRedirect('/')
 
 
 def loginview(request):
-    if request.method=='POST':
-        username=request.POST['username']
-        password=request.POST['password']
-        user=authenticate(request, username=username, password=password)
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
             return HttpResponseRedirect('/')

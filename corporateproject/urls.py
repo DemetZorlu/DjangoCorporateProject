@@ -32,7 +32,7 @@ urlpatterns = [
     path('contact/', include('home.urls')),
     path('referances/', include('home.urls')),
     path('academiccalendar/', include('home.urls')),
-    path('academiccontentlist/<int:id>/<slug:slug>/', include('home.urls')),
+    path('menucontent/<int:id>/<slug:slug>/', include('home.urls')),
     path('contentdetail/<int:id>/<slug:slug>/', include('home.urls')),
 
 ]
