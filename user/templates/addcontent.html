@@ -1,0 +1,51 @@
+{% extends "homebase.html" %}
+
+{% block title %} {{ user.username }} - İçeriklerim {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+
+{% block head %}
+    <link rel="icon" type='image/x-icon' href='{{ setting.icon.url }}'> {% endblock %}
+
+{% block content %}
+
+
+    <!-- Contact Start -->
+    <div class="single">
+        <div class="container">
+            <div class="section-header">
+                <h2>İçerik Ekleme</h2>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-9">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}" role="alert">
+                                {{ message | safe }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    {% load static %}
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <fieldset class="form-group" style="width: 100%">
+                            {{ form.media }}
+                            {{ form.as_p }}
+                        </fieldset>
+                        <div class="form-group">
+                            <button class="btn btn-success" type="submit"><i class="fa fa-save"> </i>&nbsp;&nbsp;Kaydet
+                            </button>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+
+
+{% endblock %}
+
+

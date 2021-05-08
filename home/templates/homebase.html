@@ -65,7 +65,7 @@
                             <i class="fa fa-{% if message.tags  == 'danger' %}exclamation-circle{% elif message.tags  == 'success' %}check-circle{% elif message.tags  == 'info' %}info-circle{% elif message.tags  == 'warning' %}exclamation-triangle{% endif %}" style="color:white;"></i>
                             <span>
 
-                                    {{ message }}<br>
+                                    {{ message | safe }}<br>
 
                             </span>
                         </b>
