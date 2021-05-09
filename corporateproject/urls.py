@@ -34,6 +34,7 @@ urlpatterns = [
     path('academiccalendar/', include('home.urls')),
     path('menucontent/<int:id>/<slug:slug>/', include('home.urls')),
     path('contentdetail/<int:id>/<slug:slug>/', include('home.urls')),
+    path('faqs/', include('home.urls')),
 
 ]
 # Görselin admin panelinde görüntülenmesine ve görsel yoluna adres satırı ile ulaşışmasına sağlıyor.

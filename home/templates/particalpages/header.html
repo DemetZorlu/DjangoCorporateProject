@@ -33,39 +33,48 @@
             <div class="col-lg-9">
                 <div class="top-bar-right" style="height: 100%;vertical-align:middle ; align-items: center;">
 
-                        {% if user.id is not None %}
-                            <ul class="nav navbar-nav navbar-right">
-                                <li class="nav-item dropdown">
-                                    <button type="button" id="btnLogin" data-toggle="dropdown"
-                                            class="btnlogin dropdown-toggle">
-                                        <span class="fa fa-user"></span> {{ user.username }} <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="btnLogin">
-                                        <li class="px-3 py-2">
-                                            <a href="/user/" class="dropdown-item">
-                                                <span class="fa fa-list-alt"></span> Profil
-                                            </a>
-                                            <a href="/user/comments/" class="dropdown-item">
-                                                <span class="fa fa-comment"></span> Yorumlarım
-                                            </a>
-                                            <a href="/user/contents/" class="dropdown-item">
-                                                <span class="fa fa-plus"></span> İçeriklerim
-                                            </a>
-                                            <a href="/user/updateuserpassword/" class="dropdown-item">
-                                                <span class="fa fa-key"></span> Şifremi Değiştir
-                                            </a>
+                    <div class="text" onclick="location.href='/faqs'" style="cursor:pointer;">
+                        <h2><i class="fa fa-question"></i></h2>
+                        <p>Sıkça Sorulan Sorular</p>
+                    </div>
+                    <div class="text">
+                        <p>&nbsp;&nbsp;</p>
+                    </div>
 
-                                            <a href="/logout/" class="dropdown-item">
-                                                <span class="fas fa-sign-out-alt"></span> Çıkış
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        {% else %}
-                            <a href="/login/" class="text-uppercase"><i class="fa fa-sign-in-alt" aria-hidden="true"></i> &nbsp;Giriş&nbsp;&nbsp;</a> <!--&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+                    {% if user.id is not None %}
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="nav-item dropdown">
+                                <button type="button" id="btnLogin" data-toggle="dropdown"
+                                        class="btnlogin dropdown-toggle">
+                                    <span class="fa fa-user"></span> {{ user.username }} <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="btnLogin">
+                                    <li class="px-3 py-2">
+                                        <a href="/user/" class="dropdown-item">
+                                            <span class="fa fa-list-alt"></span> Profil
+                                        </a>
+                                        <a href="/user/comments/" class="dropdown-item">
+                                            <span class="fa fa-comment"></span> Yorumlarım
+                                        </a>
+                                        <a href="/user/contents/" class="dropdown-item">
+                                            <span class="fa fa-plus"></span> İçeriklerim
+                                        </a>
+                                        <a href="/user/updateuserpassword/" class="dropdown-item">
+                                            <span class="fa fa-key"></span> Şifremi Değiştir
+                                        </a>
+
+                                        <a href="/logout/" class="dropdown-item">
+                                            <span class="fas fa-sign-out-alt"></span> Çıkış
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    {% else %}
+                        <a href="/login/" class="text-uppercase"><i class="fa fa-sign-in-alt" aria-hidden="true"></i>
+                            &nbsp;Giriş&nbsp;&nbsp;</a> <!--&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
                             <a href="/join/" class="text-uppercase"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;&nbsp;Kaydol</a>-->
-                        {% endif %}
+                    {% endif %}
 
                 </div>
 
@@ -157,60 +166,8 @@
                         {% endif %}
                     {% endrecursetree %}
 
-                    <!--
-
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="https://bootstrapthemes.co"
-                                               id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                                               aria-expanded="false">
-                                                Dropdown link
-                                            </a>
-                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                                <li><a class="dropdown-item dropdown-toggle" href="#">Submenu</a>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" href="#">Submenu action</a></li>
-                                                        <li><a class="dropdown-item" href="#">Another submenu action</a></li>
 
 
-                                                        <li><a class="dropdown-item dropdown-toggle" href="#">Subsubmenu</a>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Subsubmenu action aa</a></li>
-                                                                <li><a class="dropdown-item" href="#">Another subsubmenu action</a></li>
-                                                            </ul>
-                                                        </li>
-                                                        <li><a class="dropdown-item dropdown-toggle" href="#">Second subsubmenu</a>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Subsubmenu action bb</a></li>
-                                                                <li><a class="dropdown-item" href="#">Another subsubmenu action</a></li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li><a class="dropdown-item dropdown-toggle" href="#">Submenu 2</a>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a class="dropdown-item" href="#">Submenu action 2</a></li>
-                                                        <li><a class="dropdown-item" href="#">Another submenu action 2</a></li>
-
-
-                                                        <li><a class="dropdown-item dropdown-toggle" href="#">Subsubmenu</a>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Subsubmenu action 1 3</a></li>
-                                                                <li><a class="dropdown-item" href="#">Another subsubmenu action 2 3</a></li>
-                                                            </ul>
-                                                        </li>
-                                                        <li><a class="dropdown-item dropdown-toggle" href="#">Second subsubmenu 3</a>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Subsubmenu action 3 </a></li>
-                                                                <li><a class="dropdown-item" href="#">Another subsubmenu action 3</a></li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        -->
                     {% if page == 'contact' %}
                         <li class="nav-item active">
                             <a href="/contact" class="nav-item nav-link active">İletişim</a>

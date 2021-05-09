@@ -1,0 +1,51 @@
+{% extends "homebase.html" %}
+
+{% block title %} Sıkça Sorulan Sorular {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+
+{% block head %}
+    <link rel="icon" type='image/x-icon' href='{{ setting.icon.url }}'> {% endblock %}
+
+{% block content %}
+
+    {% load static %}
+    <!-- FAQs Start -->
+    <div class="faqs">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="section-header">
+                        <h2>Sıkça Sorulan Sorular?</h2>
+                    </div>
+                    <div id="accordion">
+                        {% if faqs %}
+                            {% for rs in faqs %}
+                                <div class="card">
+                                    <div class="card-header">
+                                        <a class="card-link" data-toggle="collapse" href="#collapseOne{{ rs.id }}">
+                                            <span>{{ rs.ordernumber}}</span> {{ rs.question}}
+                                        </a>
+                                    </div>
+                                    <div id="collapseOne{{ rs.id }}" class="collapse" data-parent="#accordion">
+                                        <div class="card-body">
+                                            {{ rs.answer}}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
+                    </div>
+                    <a class="btn" href="">Ask more</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FAQs End -->
+
+
+{% endblock %}
+
+

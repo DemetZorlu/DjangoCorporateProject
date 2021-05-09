@@ -14,5 +14,6 @@ urlpatterns = [
     path('autosearch/', views.autosearch, name='autosearch'),
     path('logout/', views.logoutview, name='logoutview'),
     path('login/', views.loginview, name='loginview'),
+    path('faqs/', views.faqs, name='faqs'),
 
 ]

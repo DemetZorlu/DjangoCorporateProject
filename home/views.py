@@ -8,7 +8,7 @@ from django.shortcuts import render
 # Create your views here.
 from content.models import Content, Menu, Images, Comment
 from home.forms import SearchForm
-from home.models import Setting, ContactFormu, ContactFormMessage
+from home.models import Setting, ContactFormu, ContactFormMessage, FAQ
 
 
 def index(request):
@@ -94,8 +94,6 @@ def academiccalendar(request):
 
 
 def menucontent(request, id):
-
-
     try:
         content = Content.objects.get(menu_id=id)
     except:
@@ -211,3 +209,16 @@ def loginview(request):
                'announcementdata': announcementdata,
                'activitiesdata': activitiesdata}
     return render(request, 'login.html', context)
+
+
+def faqs(request):
+    menu = Menu.objects.filter(status="True")
+    menusearch = Menu.objects.all()
+    faqs = FAQ.objects.filter(status="True").order_by('ordernumber')
+    context = {'menu': menu,
+               'menusearch': menusearch,
+               'page': 'faqs',
+               'pagename': 'Sıkça Sorulan sorular',
+               'faqs': faqs,
+               }
+    return render(request, 'faqs.html', context)
