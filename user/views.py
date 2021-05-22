@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from content.models import Menu, Comment, Content, ContentForm
+from content.models import Menu, Comment, Content, ContentForm, ContentImageForm, Images
 from user.models import UserProfile, UserProfileForm
 
 
@@ -133,7 +133,7 @@ def contentedit(request, id):
             return HttpResponseRedirect('/user/contents')
         else:
             messages.error(request, 'Güncelleme işlemi Başarısız: ' + str(form.errors))
-            return HttpResponseRedirect('/user/contentedit/'+str(id))
+            return HttpResponseRedirect('/user/contentedit/' + str(id))
     else:
         menu = Menu.objects.filter(status="True")
         menusearch = Menu.objects.all()
@@ -143,7 +143,7 @@ def contentedit(request, id):
             'menusearch': menusearch,
             'page': '/user/contentedit',
             'pagename': 'İçerik Güncelleme',
-            'form': form,}
+            'form': form, }
         return render(request, 'addcontent.html', context)
 
 
@@ -165,3 +165,34 @@ def contentdelete(request, id):
     Content.objects.filter(id=id, user_id=request.user.id).delete()
     messages.success(request, 'Silme işlemi başarılı...')
     return HttpResponseRedirect('/user/contents')
+
+
+def contentaddimage(request,id):
+    if request.method == 'POST':
+        lasturl = request.META.get('HTTP_REFERER')
+        form = ContentImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            data = Images()
+            data.title = form.cleaned_data['title']
+            data.content_id = id
+            data.image = form.cleaned_data['image']
+            data.save()
+            messages.success(request, 'Başarı ile yüklendi.')
+            return HttpResponseRedirect(lasturl)
+        else:
+            messages.warning(request, 'Form Error:' + str(form.errors))
+            return HttpResponseRedirect(lasturl)
+    else:
+        content = Content.objects.get(id=id)
+        images = []
+        try:
+            images = Images.objects.filter(content_id=id)
+        except:
+            pass
+        form = ContentImageForm()
+        context = {
+            'content': content,
+            'images': images,
+            'form': form,
+        }
+        return render(request, 'contentgallery.html', context)

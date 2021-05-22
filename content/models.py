@@ -53,7 +53,7 @@ class Content(models.Model):
         (4, 'Banner'),
         (5, 'Etkinlik'),
     )
-    user=models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     menu = models.OneToOneField(Menu, on_delete=models.CASCADE, blank=True, null=True)
     title = models.CharField(max_length=150)
     keywords = models.CharField(max_length=255)
@@ -95,6 +95,12 @@ class Images(models.Model):
     image_tag.short_description = 'Image'
 
 
+class ContentImageForm(ModelForm):
+    class Meta:
+        model = Images
+        fields = ['title', 'image']
+
+
 class Comment(models.Model):
     STATUS = (
         ('New', 'Yeni'),
@@ -132,6 +138,7 @@ STATUS = (
     ('True', 'Evet'),
     ('False', 'Hayır'),
 )
+
 
 class ContentForm(ModelForm):
     class Meta:

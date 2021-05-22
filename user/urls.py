@@ -7,9 +7,10 @@ urlpatterns = [
     path('updateuserprofile/', views.updateuserprofile, name="updateuserprofile"),
     path('updateuserpassword/', views.updateuserpassword, name="updateuserpassword"),
     path('comments/', views.comments, name="comments"),
-    path('deletecomment/<int:id>',views.deletecomment, name='deletecomment'),
+    path('deletecomment/<int:id>', views.deletecomment, name='deletecomment'),
     path('addcontent/', views.addcontent, name='addcontent'),
     path('contents/', views.contents, name='contents'),
     path('contentedit/<int:id>', views.contentedit, name='contentedit'),
     path('contentdelete/<int:id>', views.contentdelete, name='contentdelete'),
+    path('contentaddimage/<int:id>', views.contentaddimage, name='contentaddimage'),
 ]

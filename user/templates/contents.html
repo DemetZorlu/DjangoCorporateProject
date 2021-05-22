@@ -47,16 +47,21 @@
                             <tr>
                                 <td class="text-left">
                                     <a href="/content/{{ rs.id }}/{{ rs.slug }}">
-                                    <img src="{{ rs.image.url }}" style="height: 30px;"></a>
+                                        <img src="{{ rs.image.url }}" style="height: 30px;"></a>
                                 </td>
-                                <td class="text-left"><a href="/contentdetail/{{ rs.id }}/{{ rs.slug }}/">{{ rs.title }}</a></td>
+                                <td class="text-left"><a
+                                        href="/contentdetail/{{ rs.id }}/{{ rs.slug }}/">{{ rs.title }}</a></td>
                                 <td class="text-left">{{ rs.type }}</td>
                                 <td class="text-left">{{ rs.status }}</td>
                                 <td class="text-left">{{ rs.created_at|date:"d.m.Y - H:m" }}</td>
                                 <td class="text-left">
-                                    <a class="btn btn-primary" href="/user/contentedit/{{ rs.id }}">Güncelle</a>
+                                    <a class="btn btn-success" href="javascript:;"
+                                       onclick="window.open('/user/contentaddimage/{{ rs.id }}', 'gallery', 'height=600, width=800, top=50, left=150')"><i
+                                            class="fa fa-plus"> </i>&nbsp;Görsel Ekle</a>
+                                    <a class="btn btn-primary" href="/user/contentedit/{{ rs.id }}"><i
+                                            class="fa fa-edit"> </i>&nbsp;Güncelle</a>
                                     <a class="btn btn-danger" onclick="return confirm('Emin misiniz?')"
-                                       href="/user/contentdelete/{{ rs.id }}">Sil</a>
+                                       href="/user/contentdelete/{{ rs.id }}"><i class="fa fa-trash"> </i>&nbsp;Sil</a>
                                 </td>
                             </tr>
                         {% endfor %}
