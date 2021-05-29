@@ -9,10 +9,10 @@ body {
 }
 
 h1,
-h2, 
-h3, 
+h2,
+h3,
 h4,
-h5, 
+h5,
 h6 {
     font-family: 'EB Garamond', serif;
     font-weight: 600;
@@ -168,7 +168,7 @@ a:focus {
     .top-bar .logo {
         text-align: center;
     }
-    
+
     .top-bar .social {
         display: none;
     }
@@ -186,8 +186,10 @@ a:focus {
 
 .nav-bar.nav-sticky {
     position: fixed;
-    top: 0;
+    top: 30px;
     width: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     padding: 10px 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, .3);
     z-index: 999;
@@ -233,20 +235,20 @@ a:focus {
     .nav-bar {
         padding: 20px 60px;
     }
-    
+
     .nav-bar.nav-sticky {
         padding: 10px 60px;
     }
-    
+
     .nav-bar,
     .nav-bar .navbar {
         background: #121518 !important;
     }
-    
+
     .nav-bar .navbar-brand {
         display: none;
     }
-    
+
     .nav-bar a.nav-link {
         padding: 8px 15px;
         font-size: 15px;
@@ -254,21 +256,21 @@ a:focus {
     }
 }
 
-@media (max-width: 991.98px) {   
+@media (max-width: 991.98px) {
     .nav-bar,
     .nav-bar .navbar {
         padding: 3px 0;
         background: #121518 !important;
     }
-    
+
     .nav-bar a.nav-link {
         padding: 5px;
     }
-    
+
     .nav-bar .dropdown-menu {
         box-shadow: none;
     }
-    
+
     .nav-bar .btn {
         display: none;
     }
@@ -358,11 +360,11 @@ a:focus {
         font-size: 40px;
         font-weight: 700;
     }
-    
+
     .carousel .carousel-caption p {
         font-size: 20px;
     }
-    
+
     .carousel .carousel-caption .btn {
         padding: 12px 30px;
         font-size: 18px;
@@ -376,11 +378,11 @@ a:focus {
         font-size: 30px;
         font-weight: 500;
     }
-    
+
     .carousel .carousel-caption p {
         font-size: 16px;
     }
-    
+
     .carousel .carousel-caption .btn {
         padding: 10px 25px;
         font-size: 16px;
@@ -455,7 +457,7 @@ a:focus {
     .page-header h2 {
         font-size: 35px;
     }
-    
+
     .page-header a {
         font-size: 18px;
     }
@@ -531,7 +533,7 @@ a:focus {
     .feature-top .col-md-3:nth-child(1n) {
         border-right: none;
     }
-    
+
     .feature-top .col-md-3:last-child {
         border-bottom: none;
     }
@@ -541,7 +543,7 @@ a:focus {
     .feature-top .col-md-3:nth-child(2n) {
         border-right: none;
     }
-    
+
     .feature-top .col-md-3:nth-child(3n),
     .feature-top .col-md-3:nth-child(4n) {
         border-bottom: none;
@@ -552,7 +554,7 @@ a:focus {
     .feature-top .col-md-3 {
         border-bottom: none;
     }
-    
+
     .feature-top .col-md-3:nth-child(4n) {
         border-right: none;
     }
@@ -889,7 +891,7 @@ a:focus {
     object-fit: cover;
 }
 
-@media(max-width: 767.98px) {
+@media (max-width: 767.98px) {
     .faqs .faqs-img {
         margin-bottom: 30px;
         height: auto;
@@ -1088,6 +1090,7 @@ a:focus {
     width: 100%;
     margin-bottom: 25px;
 }
+
 .blog .blog-item h3 {
     font-size: 25px;
     font-weight: 600;
@@ -1287,16 +1290,16 @@ a:focus {
         padding-right: 15px;
         padding-bottom: 30px;
     }
-    
+
     .timeline .timeline-container:last-child {
         padding-bottom: 0;
     }
-    
+
     .timeline .timeline-container.right {
         left: 0%;
     }
 
-    .timeline .timeline-container.left::after, 
+    .timeline .timeline-container.left::after,
     .timeline .timeline-container.right::after,
     .timeline .timeline-container.left::before,
     .timeline .timeline-container.right::before {
@@ -1304,7 +1307,7 @@ a:focus {
         height: 35px;
         left: 15px;
     }
-    
+
     .timeline .timeline-container.left .timeline-content,
     .timeline .timeline-container.right .timeline-content {
         border-left: 5px solid #aa9166;
@@ -1385,8 +1388,8 @@ a:focus {
 
 .portfolio img {
     position: relative;
-    width: 100%; 
-    height: 100%; 
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
@@ -1658,7 +1661,7 @@ a:focus {
 
 .footer .footer-about h2,
 .footer .footer-link h2,
-.footer .footer-contact h2{
+.footer .footer-contact h2 {
     position: relative;
     margin-bottom: 30px;
     font-size: 25px;
@@ -1776,29 +1779,35 @@ a:focus {
     height: 46px;
     padding: 0 10px;
 }
+
 .rate:not(:checked) > input {
-    position:absolute;
+    position: absolute;
     display: none;
 }
+
 .rate:not(:checked) > label {
-    float:right;
-    width:1em;
-    overflow:hidden;
-    white-space:nowrap;
-    cursor:pointer;
-    font-size:30px;
-    color:#ccc;
+    float: right;
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 30px;
+    color: #ccc;
 }
+
 .rate:not(:checked) > label:before {
     content: '★ ';
 }
+
 .rate > input:checked ~ label {
     color: #ffc700;
 }
+
 .rate:not(:checked) > label:hover,
 .rate:not(:checked) > label:hover ~ label {
     color: #deb217;
 }
+
 .rate > input:checked + label:hover,
 .rate > input:checked + label:hover ~ label,
 .rate > input:checked ~ label:hover,

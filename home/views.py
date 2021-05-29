@@ -150,6 +150,12 @@ def contentsearch(request):
             menuid = form.cleaned_data['menuid']
             if menuid == 0:
                 contents = Content.objects.filter(title__icontains=query)
+            elif menuid == -2:
+                contents = Content.objects.filter(title__icontains=query, type=2)
+            elif menuid == -3:
+                contents = Content.objects.filter(title__icontains=query, type=3)
+            elif menuid == -5:
+                contents = Content.objects.filter(title__icontains=query, type=5)
             else:
                 contents = Content.objects.filter(title__icontains=query, menu_id=menuid)
             context = {'menu': menu,

@@ -185,6 +185,11 @@
                                 <optgroup label="{{ node.title }}">{{ children }}</optgroup>
                             {% endif %}
                         {% endrecursetree %}
+                        <optgroup label="Diğer">
+                            <option value="-2">Haberler</option>
+                            <option value="-3">Duyurular</option>
+                            <option value="-5">Etkinlikler</option>
+                        </optgroup>
                     </select>
                     <button class="btn form-control-sm" type="submit"><i class="fa fa-search"> </i></button>
                 </form>
