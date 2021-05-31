@@ -18,7 +18,7 @@ class MenuAdmin(admin.ModelAdmin):
 
 
 class ContentAdmin(admin.ModelAdmin):
-    list_display = ['title', 'status', 'menu', 'image_tag']
+    list_display = ['title', 'status', 'type', 'image_tag']
     readonly_fields = ['image_tag']
     list_filter = ['status', 'type']
     inlines = [ContentImageInline]

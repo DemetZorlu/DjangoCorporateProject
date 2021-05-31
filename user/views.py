@@ -167,7 +167,7 @@ def contentdelete(request, id):
     return HttpResponseRedirect('/user/contents')
 
 
-def contentaddimage(request,id):
+def contentaddimage(request, id):
     if request.method == 'POST':
         lasturl = request.META.get('HTTP_REFERER')
         form = ContentImageForm(request.POST, request.FILES)
@@ -196,3 +196,9 @@ def contentaddimage(request,id):
             'form': form,
         }
         return render(request, 'contentgallery.html', context)
+
+
+def deleteimage(request, id, contentid):
+    Images.objects.filter(id=id).delete()
+    messages.success(request, 'Görsel Silindi.')
+    return HttpResponseRedirect('/user/contentaddimage/' + str(contentid))

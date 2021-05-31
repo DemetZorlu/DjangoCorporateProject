@@ -16,7 +16,7 @@
                             <!--<i class="fa fa-list-alt"></i>
                             <a href="">{{rs.description}}</a>-->
                             <i class="fa fa-calendar-alt"></i>
-                            <p>{{ rs.created_at }}</p>
+                            <p>{{ rs.created_at|date:"d.m.Y" }}</p>
                         </div>
                         <p>
                             {{rs.description}}

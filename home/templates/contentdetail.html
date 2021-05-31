@@ -67,232 +67,237 @@
         </div>
     </div>
     <!-- Single Page End -->
+    {% if content.type != 1 %}
+        <div class="contact">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Yorum Ekleme</h2>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div>
+                            {% for rs in comments %}
+                                <div class="card p-3">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="user d-flex flex-row align-items-center"><img
+                                                src="{{ user.userprofile.image.url }}" width="40" height="40"
+                                                class="user-img rounded-circle mr-2"> <span><small
+                                                class="font-weight-bold text-primary">{{ rs.user.username }}</small> <small
+                                                class="font-weight-bold">{{ rs.subject }}</small></span></div>
+                                        <small>{{ rs.created_at|date:"d.m.Y" }}</small>
+                                    </div>
+                                    <div class="action d-flex justify-content-between mt-2 align-items-center">
+                                        <div class="reply px-4"><small>{{ rs.comment }}</small></div>
+                                        <!--<div class="reply px-4"><small>Remove</small> <span class="dots"></span>
+                                            <small>Reply</small> <span class="dots"></span> <small>Translate</small></div>-->
+                                        <div class="icons align-items-center">
+                                            <i class="fa fa-star{% if rs.rate >= 1 %} text-warning {% endif %}"></i>
+                                            <i class="fa fa-star{% if rs.rate > 2 %} text-warning {% endif %}"></i>
+                                            <i class="fa fa-star{% if rs.rate > 3 %} text-warning {% endif %}"></i>
+                                            <i class="fa fa-star{% if rs.rate > 4 %} text-warning {% endif %}"></i>
+                                            <i class="fa fa-star{% if rs.rate == 5 %} text-warning {% endif %}"></i>
 
-    <div class="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2>Yorum Ekleme</h2>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div>
-                        {% for rs in comments %}
-                            <div class="card p-3">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="user d-flex flex-row align-items-center"><img
-                                            src="{{ user.userprofile.image.url }}" width="40" height="40"
-                                            class="user-img rounded-circle mr-2"> <span><small
-                                            class="font-weight-bold text-primary">{{ rs.user.username }}</small> <small
-                                            class="font-weight-bold">{{ rs.subject }}</small></span></div>
-                                    <small>{{ rs.created_at|date:"d.m.Y" }}</small>
-                                </div>
-                                <div class="action d-flex justify-content-between mt-2 align-items-center">
-                                    <div class="reply px-4"><small>{{ rs.comment }}</small></div>
-                                    <!--<div class="reply px-4"><small>Remove</small> <span class="dots"></span>
-                                        <small>Reply</small> <span class="dots"></span> <small>Translate</small></div>-->
-                                    <div class="icons align-items-center">
-                                        <i class="fa fa-star{% if rs.rate >= 1 %} text-warning {% endif %}"></i>
-                                        <i class="fa fa-star{% if rs.rate > 2 %} text-warning {% endif %}"></i>
-                                        <i class="fa fa-star{% if rs.rate > 3 %} text-warning {% endif %}"></i>
-                                        <i class="fa fa-star{% if rs.rate > 4 %} text-warning {% endif %}"></i>
-                                        <i class="fa fa-star{% if rs.rate == 5 %} text-warning {% endif %}"></i>
-
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        {% endfor %}
-                        <!--<div class="card p-3">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="user d-flex flex-row align-items-center"><img
-                                        src="https://i.imgur.com/hczKIze.jpg" width="30"
-                                        class="user-img rounded-circle mr-2"> <span><small
-                                        class="font-weight-bold text-primary">james_olesenn</small> <small
-                                        class="font-weight-bold">Hmm, This poster looks cool</small></span></div>
-                                <small>2 days ago</small>
-                            </div>
-                            <div class="action d-flex justify-content-between mt-2 align-items-center">
-                                <div class="reply px-4"><small>Remove</small> <span class="dots"></span>
-                                    <small>Reply</small> <span class="dots"></span> <small>Translate</small></div>
-                                <div class="icons align-items-center"><i class="fa fa-star text-warning"></i> <i
-                                        class="fa fa-check-circle-o check-icon"></i></div>
-                            </div>
-                        </div>
-                        <div class="card p-3 mt-2">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="user d-flex flex-row align-items-center"><img
-                                        src="https://i.imgur.com/C4egmYM.jpg" width="30"
-                                        class="user-img rounded-circle mr-2"> <span><small
-                                        class="font-weight-bold text-primary">olan_sams</small> <small
-                                        class="font-weight-bold">Loving your work and profile! </small></span></div>
-                                <small>3 days ago</small>
-                            </div>
-                            <div class="action d-flex justify-content-between mt-2 align-items-center">
-                                <div class="reply px-4"><small>Remove</small> <span class="dots"></span>
-                                    <small>Reply</small> <span class="dots"></span> <small>Translate</small></div>
-                                <div class="icons align-items-center"><i
-                                        class="fa fa-check-circle-o check-icon text-primary"></i></div>
-                            </div>
-                        </div>
-                        <div class="card p-3 mt-2">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="user d-flex flex-row align-items-center"><img
-                                        src="https://i.imgur.com/0LKZQYM.jpg" width="30"
-                                        class="user-img rounded-circle mr-2"> <span><small
-                                        class="font-weight-bold text-primary">rashida_jones</small> <small
-                                        class="font-weight-bold">Really cool Which filter are you using? </small></span>
+                            {% endfor %}
+                            <!--<div class="card p-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="user d-flex flex-row align-items-center"><img
+                                            src="https://i.imgur.com/hczKIze.jpg" width="30"
+                                            class="user-img rounded-circle mr-2"> <span><small
+                                            class="font-weight-bold text-primary">james_olesenn</small> <small
+                                            class="font-weight-bold">Hmm, This poster looks cool</small></span></div>
+                                    <small>2 days ago</small>
                                 </div>
-                                <small>3 days ago</small>
-                            </div>
-                            <div class="action d-flex justify-content-between mt-2 align-items-center">
-                                <div class="reply px-4"><small>Remove</small> <span class="dots"></span>
-                                    <small>Reply</small> <span class="dots"></span> <small>Translate</small></div>
-                                <div class="icons align-items-center"><i class="fa fa-user-plus text-muted"></i> <i
-                                        class="fa fa-star-o text-muted"></i> <i
-                                        class="fa fa-check-circle-o check-icon text-primary"></i></div>
-                            </div>
-                        </div>
-                        <div class="card p-3 mt-2">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="user d-flex flex-row align-items-center"><img
-                                        src="https://i.imgur.com/0LKZQYM.jpg" width="30"
-                                        class="user-img rounded-circle mr-2"> <span><small
-                                        class="font-weight-bold text-primary">rashida_jones</small> <small
-                                        class="font-weight-bold">Really cool Which filter are you using? </small></span>
+                                <div class="action d-flex justify-content-between mt-2 align-items-center">
+                                    <div class="reply px-4"><small>Remove</small> <span class="dots"></span>
+                                        <small>Reply</small> <span class="dots"></span> <small>Translate</small></div>
+                                    <div class="icons align-items-center"><i class="fa fa-star text-warning"></i> <i
+                                            class="fa fa-check-circle-o check-icon"></i></div>
                                 </div>
-                                <small>3 days ago</small>
                             </div>
-                            <div class="action d-flex justify-content-between mt-2 align-items-center">
-                                <div class="reply px-4"><small>Remove</small> <span class="dots"></span>
-                                    <small>Reply</small> <span class="dots"></span> <small>Translate</small></div>
-                                <div class="icons align-items-center"><i class="fa fa-user-plus text-muted"></i> <i
-                                        class="fa fa-star-o text-muted"></i> <i
-                                        class="fa fa-check-circle-o check-icon text-primary"></i></div>
-                            </div>
-                        </div>
-                        <div class="card p-3 mt-2">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="user d-flex flex-row align-items-center"><img
-                                        src="https://i.imgur.com/0LKZQYM.jpg" width="30"
-                                        class="user-img rounded-circle mr-2"> <span><small
-                                        class="font-weight-bold text-primary">rashida_jones</small> <small
-                                        class="font-weight-bold">Really cool Which filter are you using? </small></span>
+                            <div class="card p-3 mt-2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="user d-flex flex-row align-items-center"><img
+                                            src="https://i.imgur.com/C4egmYM.jpg" width="30"
+                                            class="user-img rounded-circle mr-2"> <span><small
+                                            class="font-weight-bold text-primary">olan_sams</small> <small
+                                            class="font-weight-bold">Loving your work and profile! </small></span></div>
+                                    <small>3 days ago</small>
                                 </div>
-                                <small>3 days ago</small>
-                            </div>
-                            <div class="action d-flex justify-content-between mt-2 align-items-center">
-                                <div class="reply px-4"><small>Remove</small> <span class="dots"></span>
-                                    <small>Reply</small> <span class="dots"></span> <small>Translate</small></div>
-                                <div class="icons align-items-center"><i class="fa fa-user-plus text-muted"></i> <i
-                                        class="fa fa-star-o text-muted"></i> <i
-                                        class="fa fa-check-circle-o check-icon text-primary"></i></div>
-                            </div>
-                        </div>
-                        <div class="card p-3 mt-2">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="user d-flex flex-row align-items-center"><img
-                                        src="https://i.imgur.com/0LKZQYM.jpg" width="30"
-                                        class="user-img rounded-circle mr-2"> <span><small
-                                        class="font-weight-bold text-primary">rashida_jones</small> <small
-                                        class="font-weight-bold">Really cool Which filter are you using? </small></span>
+                                <div class="action d-flex justify-content-between mt-2 align-items-center">
+                                    <div class="reply px-4"><small>Remove</small> <span class="dots"></span>
+                                        <small>Reply</small> <span class="dots"></span> <small>Translate</small></div>
+                                    <div class="icons align-items-center"><i
+                                            class="fa fa-check-circle-o check-icon text-primary"></i></div>
                                 </div>
-                                <small>3 days ago</small>
                             </div>
-                            <div class="action d-flex justify-content-between mt-2 align-items-center">
-                                <div class="reply px-4"><small>Remove</small> <span class="dots"></span>
-                                    <small>Reply</small> <span class="dots"></span> <small>Translate</small></div>
-                                <div class="icons align-items-center"><i class="fa fa-user-plus text-muted"></i> <i
-                                        class="fa fa-star-o text-muted"></i> <i
-                                        class="fa fa-check-circle-o check-icon text-primary"></i></div>
-                            </div>
-                        </div>
-                        <div class="card p-3 mt-2">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="user d-flex flex-row align-items-center"><img
-                                        src="https://i.imgur.com/0LKZQYM.jpg" width="30"
-                                        class="user-img rounded-circle mr-2"> <span><small
-                                        class="font-weight-bold text-primary">rashida_jones</small> <small
-                                        class="font-weight-bold">Really cool Which filter are you using? </small></span>
+                            <div class="card p-3 mt-2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="user d-flex flex-row align-items-center"><img
+                                            src="https://i.imgur.com/0LKZQYM.jpg" width="30"
+                                            class="user-img rounded-circle mr-2"> <span><small
+                                            class="font-weight-bold text-primary">rashida_jones</small> <small
+                                            class="font-weight-bold">Really cool Which filter are you using? </small></span>
+                                    </div>
+                                    <small>3 days ago</small>
                                 </div>
-                                <small>3 days ago</small>
+                                <div class="action d-flex justify-content-between mt-2 align-items-center">
+                                    <div class="reply px-4"><small>Remove</small> <span class="dots"></span>
+                                        <small>Reply</small> <span class="dots"></span> <small>Translate</small></div>
+                                    <div class="icons align-items-center"><i class="fa fa-user-plus text-muted"></i> <i
+                                            class="fa fa-star-o text-muted"></i> <i
+                                            class="fa fa-check-circle-o check-icon text-primary"></i></div>
+                                </div>
                             </div>
-                            <div class="action d-flex justify-content-between mt-2 align-items-center">
-                                <div class="reply px-4"><small>Remove</small> <span class="dots"></span>
-                                    <small>Reply</small> <span class="dots"></span> <small>Translate</small></div>
-                                <div class="icons align-items-center"><i class="fa fa-user-plus text-muted"></i> <i
-                                        class="fa fa-star-o text-muted"></i> <i
-                                        class="fa fa-check-circle-o check-icon text-primary"></i></div>
+                            <div class="card p-3 mt-2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="user d-flex flex-row align-items-center"><img
+                                            src="https://i.imgur.com/0LKZQYM.jpg" width="30"
+                                            class="user-img rounded-circle mr-2"> <span><small
+                                            class="font-weight-bold text-primary">rashida_jones</small> <small
+                                            class="font-weight-bold">Really cool Which filter are you using? </small></span>
+                                    </div>
+                                    <small>3 days ago</small>
+                                </div>
+                                <div class="action d-flex justify-content-between mt-2 align-items-center">
+                                    <div class="reply px-4"><small>Remove</small> <span class="dots"></span>
+                                        <small>Reply</small> <span class="dots"></span> <small>Translate</small></div>
+                                    <div class="icons align-items-center"><i class="fa fa-user-plus text-muted"></i> <i
+                                            class="fa fa-star-o text-muted"></i> <i
+                                            class="fa fa-check-circle-o check-icon text-primary"></i></div>
+                                </div>
                             </div>
+                            <div class="card p-3 mt-2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="user d-flex flex-row align-items-center"><img
+                                            src="https://i.imgur.com/0LKZQYM.jpg" width="30"
+                                            class="user-img rounded-circle mr-2"> <span><small
+                                            class="font-weight-bold text-primary">rashida_jones</small> <small
+                                            class="font-weight-bold">Really cool Which filter are you using? </small></span>
+                                    </div>
+                                    <small>3 days ago</small>
+                                </div>
+                                <div class="action d-flex justify-content-between mt-2 align-items-center">
+                                    <div class="reply px-4"><small>Remove</small> <span class="dots"></span>
+                                        <small>Reply</small> <span class="dots"></span> <small>Translate</small></div>
+                                    <div class="icons align-items-center"><i class="fa fa-user-plus text-muted"></i> <i
+                                            class="fa fa-star-o text-muted"></i> <i
+                                            class="fa fa-check-circle-o check-icon text-primary"></i></div>
+                                </div>
+                            </div>
+                            <div class="card p-3 mt-2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="user d-flex flex-row align-items-center"><img
+                                            src="https://i.imgur.com/0LKZQYM.jpg" width="30"
+                                            class="user-img rounded-circle mr-2"> <span><small
+                                            class="font-weight-bold text-primary">rashida_jones</small> <small
+                                            class="font-weight-bold">Really cool Which filter are you using? </small></span>
+                                    </div>
+                                    <small>3 days ago</small>
+                                </div>
+                                <div class="action d-flex justify-content-between mt-2 align-items-center">
+                                    <div class="reply px-4"><small>Remove</small> <span class="dots"></span>
+                                        <small>Reply</small> <span class="dots"></span> <small>Translate</small></div>
+                                    <div class="icons align-items-center"><i class="fa fa-user-plus text-muted"></i> <i
+                                            class="fa fa-star-o text-muted"></i> <i
+                                            class="fa fa-check-circle-o check-icon text-primary"></i></div>
+                                </div>
+                            </div>
+                            <div class="card p-3 mt-2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="user d-flex flex-row align-items-center"><img
+                                            src="https://i.imgur.com/0LKZQYM.jpg" width="30"
+                                            class="user-img rounded-circle mr-2"> <span><small
+                                            class="font-weight-bold text-primary">rashida_jones</small> <small
+                                            class="font-weight-bold">Really cool Which filter are you using? </small></span>
+                                    </div>
+                                    <small>3 days ago</small>
+                                </div>
+                                <div class="action d-flex justify-content-between mt-2 align-items-center">
+                                    <div class="reply px-4"><small>Remove</small> <span class="dots"></span>
+                                        <small>Reply</small> <span class="dots"></span> <small>Translate</small></div>
+                                    <div class="icons align-items-center"><i class="fa fa-user-plus text-muted"></i> <i
+                                            class="fa fa-star-o text-muted"></i> <i
+                                            class="fa fa-check-circle-o check-icon text-primary"></i></div>
+                                </div>
+                            </div>
+                            <div class="card p-3 mt-2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="user d-flex flex-row align-items-center"><img
+                                            src="https://i.imgur.com/ZSkeqnd.jpg" width="30"
+                                            class="user-img rounded-circle mr-2"> <span><small
+                                            class="font-weight-bold text-primary">simona_rnasi</small> <small
+                                            class="font-weight-bold text-primary">@macky_lones</small> <small
+                                            class="font-weight-bold text-primary">@rashida_jones</small> <small
+                                            class="font-weight-bold">Thanks </small></span></div>
+                                    <small>3 days ago</small>
+                                </div>
+                                <div class="action d-flex justify-content-between mt-2 align-items-center">
+                                    <div class="reply px-4"><small>Remove</small> <span class="dots"></span>
+                                        <small>Reply</small> <span class="dots"></span> <small>Translate</small></div>
+                                    <div class="icons align-items-center"><i
+                                            class="fa fa-check-circle-o check-icon text-primary"></i></div>
+                                </div>
+                            </div>-->
                         </div>
-                        <div class="card p-3 mt-2">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="user d-flex flex-row align-items-center"><img
-                                        src="https://i.imgur.com/ZSkeqnd.jpg" width="30"
-                                        class="user-img rounded-circle mr-2"> <span><small
-                                        class="font-weight-bold text-primary">simona_rnasi</small> <small
-                                        class="font-weight-bold text-primary">@macky_lones</small> <small
-                                        class="font-weight-bold text-primary">@rashida_jones</small> <small
-                                        class="font-weight-bold">Thanks </small></span></div>
-                                <small>3 days ago</small>
-                            </div>
-                            <div class="action d-flex justify-content-between mt-2 align-items-center">
-                                <div class="reply px-4"><small>Remove</small> <span class="dots"></span>
-                                    <small>Reply</small> <span class="dots"></span> <small>Translate</small></div>
-                                <div class="icons align-items-center"><i
-                                        class="fa fa-check-circle-o check-icon text-primary"></i></div>
-                            </div>
-                        </div>-->
-                    </div>
 
-                </div>
-                <div class=" {% if comments %} col-md-6 {% else %} col-md-8 {% endif %}">
-                    {% if messages %}
-                        {% for message in messages %}
-                            <div class="alert alert-{{ message.tags }}" role="alert">
-                                {{ message }}
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                    <!--------------------------------------------------------------------->
-                    <div class="contact-form">
-                        <form action="/content/addcomment/{{ content.id }}" method="post">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="subject" id="id_subject"
-                                       placeholder="Konu" required="required"/>
-                            </div>
-                            <div class="form-group">
+                    </div>
+                    <div class=" {% if comments %} col-md-6 {% else %} col-md-8 {% endif %}">
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }}" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <!--------------------------------------------------------------------->
+                        <div class="contact-form">
+                            <form action="/content/addcomment/{{ content.id }}" method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="subject" id="id_subject"
+                                           placeholder="Konu" required="required"/>
+                                </div>
+                                <div class="form-group">
                                 <textarea class="form-control" name="comment" id="id_comment" placeholder="Yorum"
                                           required="required"></textarea>
-                            </div>
-                            <strong class="text-uppercase"> Puanlama:</strong>
-                            <div class="form-group">
-                                <div class="rate">
-                                    <input type="radio" id="star5" name="rate" value="5"/> <label for="star5"></label>
-                                    <input type="radio" id="star4" name="rate" value="4"/> <label for="star4"></label>
-                                    <input type="radio" id="star3" name="rate" value="3"/> <label for="star3"></label>
-                                    <input type="radio" id="star2" name="rate" value="2"/> <label for="star2"></label>
-                                    <input type="radio" id="star1" name="rate" value="1"/> <label for="star1"></label>
                                 </div>
-                            </div>
-                            <br>
-                            <div>&nbsp;</div>
-                            {% if user.id is not None %}
-                                <div>
-                                    <button class="btn" type="submit">Mesaj Gönder</button>
-
+                                <strong class="text-uppercase"> Puanlama:</strong>
+                                <div class="form-group">
+                                    <div class="rate">
+                                        <input type="radio" id="star5" name="rate" value="5"/> <label
+                                            for="star5"></label>
+                                        <input type="radio" id="star4" name="rate" value="4"/> <label
+                                            for="star4"></label>
+                                        <input type="radio" id="star3" name="rate" value="3"/> <label
+                                            for="star3"></label>
+                                        <input type="radio" id="star2" name="rate" value="2"/> <label
+                                            for="star2"></label>
+                                        <input type="radio" id="star1" name="rate" value="1"/> <label
+                                            for="star1"></label>
+                                    </div>
                                 </div>
-                            {% else %}
-                                <p>Yorum eklemek için <a href="/login">giriş</a> yapınız.</p>
-                            {% endif %}
+                                <br>
+                                <div>&nbsp;</div>
+                                {% if user.id is not None %}
+                                    <div>
+                                        <button class="btn" type="submit">Mesaj Gönder</button>
+
+                                    </div>
+                                {% else %}
+                                    <p>Yorum eklemek için <a href="/login">giriş</a> yapınız.</p>
+                                {% endif %}
 
 
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-
+    {% endif %}
 {% endblock %}
 

@@ -13,7 +13,7 @@
                     <div  class="testimonial-item" onclick="location.href='/contentdetail/{{ rs.id }}/{{ rs.slug }}'"
                     style="cursor:pointer; height: 250px;">
                     <h2>{{ rs.title | safe }}</h2>
-                    <p>{{ rs.created_at }}</p>
+                    <p>{{ rs.created_at|date:"d.m.Y" }}</p>
                     <i class="fa fa-quote-right"></i>
                     <div class="row align-items-center">
 

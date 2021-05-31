@@ -9,7 +9,7 @@
 
 {% block content %}
 
-
+{% load static %}
     <!-- Contact Start -->
     <div class="single">
         <div class="container">
@@ -46,14 +46,14 @@
                         {% for rs in contents %}
                             <tr>
                                 <td class="text-left">
-                                    <a href="/content/{{ rs.id }}/{{ rs.slug }}">
-                                        <img src="{{ rs.image.url }}" style="height: 30px;"></a>
+                                    <a href="/contentdetail/{{ rs.id }}/{{ rs.slug }}">
+                                        <img src="{% if rs.image %} {{ rs.image.url }}{% else %} {% static 'img/default.jpg' %}{% endif %}" style="height: 30px;"></a>
                                 </td>
                                 <td class="text-left"><a
                                         href="/contentdetail/{{ rs.id }}/{{ rs.slug }}/">{{ rs.title }}</a></td>
                                 <td class="text-left">{{ rs.type }}</td>
                                 <td class="text-left">{{ rs.status }}</td>
-                                <td class="text-left">{{ rs.created_at|date:"d.m.Y - H:m" }}</td>
+                                <td class="text-left">{{ rs.created_at|date:"d.m.Y" }}</td>
                                 <td class="text-left">
                                     <a class="btn btn-success" href="javascript:;"
                                        onclick="window.open('/user/contentaddimage/{{ rs.id }}', 'gallery', 'height=600, width=800, top=50, left=150')"><i
